@@ -1,0 +1,78 @@
+<div class="p-6 flex items-center justify-center bg-gray-100">
+  <div class="max-w-2xl w-full bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-center">User Registration</h2>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="mb-3">
+          <label class="block font-semibold">Full Name <span class="text-red-500">*</span></label>
+          <input type="text" formControlName="name" class="w-full border p-2 rounded"
+            [ngClass]="{'border-red-500': errors.name}" />
+          <div *ngIf="errors.name" class="text-red-500 text-sm">{{ errors.name }}</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="block font-semibold">Email <span class="text-red-500">*</span></label>
+          <input type="email" formControlName="email" class="w-full border p-2 rounded"
+            [ngClass]="{'border-red-500': errors.email}" />
+          <div *ngIf="errors.email" class="text-red-500 text-sm">{{ errors.email }}</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="block font-semibold">Mobile <span class="text-red-500">*</span></label>
+          <input type="text" formControlName="mobile" class="w-full border p-2 rounded"
+            [ngClass]="{'border-red-500': errors.mobile}" />
+          <div *ngIf="errors.mobile" class="text-red-500 text-sm">{{ errors.mobile }}</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="block font-semibold">Gender <span class="text-red-500">*</span></label>
+          <select formControlName="gender" class="w-full border p-2 rounded">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <div *ngIf="userForm.controls['gender'].invalid && userForm.controls['gender'].touched"
+            class="text-red-500 text-sm">
+            Gender is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="block font-semibold">Date of Birth <span class="text-red-500">*</span></label>
+          <input type="date" formControlName="dob" class="w-full border p-2 rounded" />
+          <div *ngIf="errors.dob" class="text-red-500 text-sm">{{ errors.dob }}</div>
+        </div>
+
+
+        <div class="mb-3 relative">
+          <label class="block font-semibold">Password <span class="text-red-500">*</span></label>
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+            class="w-full border p-2 rounded pr-10" [ngClass]="{'border-red-500': errors.password}" />
+          <button type="button" class="absolute right-3 top-8 text-gray-600" (click)="showPassword = !showPassword">
+            <i class="fas" [ngClass]="{'fa-eye': !showPassword, 'fa-eye-slash': showPassword}"></i>
+          </button>
+          <div *ngIf="errors.password" class="text-red-500 text-sm">{{ errors.password }}</div>
+        </div>
+
+        <div class="mb-3 relative">
+          <label class="block font-semibold">Confirm Password <span class="text-red-500">*</span></label>
+          <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword"
+            class="w-full border p-2 rounded pr-10"
+            [ngClass]="{'border-red-500': errors.confirmPassword || errors.passwordMismatch}" />
+          <button type="button" class="absolute right-3 top-8 text-gray-600"
+            (click)="showConfirmPassword = !showConfirmPassword">
+            <i class="fas" [ngClass]="{'fa-eye': !showConfirmPassword, 'fa-eye-slash': showConfirmPassword}"></i>
+          </button>
+          <div *ngIf="errors.confirmPassword" class="text-red-500 text-sm">{{ errors.confirmPassword }}</div>
+          <div *ngIf="errors.passwordMismatch" class="text-red-500 text-sm">Passwords do not match.</div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="userForm.invalid"
+        class="w-1/6 px-4 py-2 rounded text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed mt-4 mx-auto block">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
