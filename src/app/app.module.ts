@@ -9,12 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserModule, // Make sure UserModule is imported
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right', // Position of the toast
-      preventDuplicates: true, // Prevent duplicate toasts
-      timeOut: 3000 // Auto-close after 3 seconds
-    })
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
